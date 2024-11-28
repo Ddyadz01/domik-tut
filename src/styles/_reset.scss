@@ -1,0 +1,20 @@
+@import url("./__fonts.scss");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter Tight", sans-serif;
+  list-style: none;
+  box-sizing: border-box;
+  color: var(--color-text);
+}
+
+:root {
+  --bg-color: #161623;
+  --color-primary: rgb(244, 103, 62);
+  --color-primary-hover: rgb(234, 70, 21);
+  --color-gray: rgb(192, 194, 215);
+  --color-text: #fff;
+  --bg-element: #1e1e2c;
+  --color-dark-text: #424262;
+}

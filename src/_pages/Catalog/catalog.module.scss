@@ -1,0 +1,15 @@
+.catalog__page {
+  margin-top: 80px;
+
+  .catalog__title {
+    p {
+      margin-bottom: 50px;
+    }
+  }
+  .catalog__items {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+  }
+}

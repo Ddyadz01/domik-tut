@@ -1,0 +1,43 @@
+p {
+  align-items: center;
+  display: flex;
+  align-items: center;
+}
+
+p.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.xs {
+  font-size: 12px;
+}
+
+.sm {
+  font-size: 14px;
+}
+
+.base {
+  font-size: 16px;
+  // font-weight: 600;
+}
+
+.lg {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.xl {
+  font-size: 20px;
+}
+
+.title-block {
+  font-size: 40px;
+  font-weight: 800;
+}
+
+.title-block-lg {
+  font-size: 24px;
+  font-weight: 800;
+}

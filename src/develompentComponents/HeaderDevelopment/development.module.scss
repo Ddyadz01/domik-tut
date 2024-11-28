@@ -1,0 +1,22 @@
+.dev {
+  width: 100%;
+  position: sticky;
+  top: 70px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  &__content {
+    width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-element);
+    padding: 20px 5px;
+    border-radius: 9px;
+    &_left {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

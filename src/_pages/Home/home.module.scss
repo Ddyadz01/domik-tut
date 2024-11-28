@@ -1,0 +1,115 @@
+.home {
+  clip-path: polygon(50% 0%, 100% 0, 100% 95%, 65% 98%, 38% 98%, 0 95%, 0 0);
+  //polygon(20% 0%, 80% 0%, 100% 0, 100% 90%, 50% 96%, 0 90%, 0 0)
+  top: -70px;
+  position: relative;
+  width: 100%;
+  max-width: 1900px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    background: linear-gradient(
+      90deg,
+      rgb(22, 22, 35) 18.307%,
+      rgba(22, 22, 35, 0.91) 32.998%,
+      rgba(22, 22, 35, 0.63) 49.946%,
+      rgba(22, 22, 35, 0.26) 72.928%,
+      rgb(22, 22, 35) 100%
+    );
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  &__content {
+    width: 1440px;
+    position: absolute;
+    top: 20%;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &_left {
+      max-width: 600px;
+      h1 {
+        font-size: 60px;
+        font-weight: 800;
+        line-height: 140%;
+        letter-spacing: 2%;
+        text-align: left;
+      }
+      p {
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 150%;
+        letter-spacing: 0%;
+        text-align: left;
+        margin-top: 20px;
+      }
+      &_media {
+        margin-top: 90px;
+        display: flex;
+        align-items: center;
+        img {
+          margin-right: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.home_page__about {
+  &_cards {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    &__card {
+      max-width: 310px;
+      img {
+        margin-bottom: 10px;
+      }
+      p {
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        line-height: 160% !important;
+        letter-spacing: 0% !important;
+        text-align: left !important;
+      }
+    }
+  }
+}
+
+.popular__items {
+  margin-top: 150px;
+}
+
+.home__options {
+  margin-top: 150px;
+
+  &_list {
+    margin: 40px 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    &__item {
+      background-image: url("/images/confetti (1).png");
+      margin: 15px 0;
+      display: flex;
+      align-items: center;
+      background-color: var(--bg-element);
+      height: 100px;
+      border-radius: 20px;
+      padding: 30px;
+      width: 400px;
+      p {
+        margin-left: 20px;
+      }
+    }
+  }
+}
