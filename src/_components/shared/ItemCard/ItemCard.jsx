@@ -2,7 +2,7 @@ import { NavLink } from 'react-router';
 
 import { Button, TextComponent } from '../../IndexComponents';
 
-import { MoveRight } from 'lucide-react';
+import { Heart, MoveRight } from 'lucide-react';
 
 import styles from './item-card.module.scss';
 
@@ -10,7 +10,10 @@ export const ItemCard = ({ item }) => {
   return (
     <div className={styles.item__card}>
       <div className={styles.item__card_top}>
-        <img src={item.imageURL} alt="" />
+        <img src={item.imageURL} alt="Изображение дома" />
+        <div className={styles.item__card_top_favorite} onClick={() => console.log(item)}>
+          <Heart />
+        </div>
       </div>
       <div className={styles.item__card_content}>
         <TextComponent size="lg" text={item.title} />

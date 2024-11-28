@@ -1,21 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   user: {
-    name: null,
-    login: null,
-    token: null,
+    name: 'Альберт Микаелян',
+    login: 'Ddyadz',
+    token: 'ssdadadadadad',
   },
 };
 
 export const UserSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     login: (state) => {
-      state.user.name = "Альберт Микаелян";
-      state.user.login = "Ddyadz";
-      state.user.token = "ssdadadadadad";
+      state.user.name = 'Альберт Микаелян';
+      state.user.login = 'Ddyadz';
+      state.user.token = 'ssdadadadadad';
     },
     logout: (state) => {
       state.user.name = null;

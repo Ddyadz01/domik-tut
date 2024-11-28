@@ -35,7 +35,7 @@ export const Header = () => {
           {user.token && (
             <div className={styles.header__content_right}>
               <>
-                <Heart />
+                <LinkComponent path={'/profile/favorites'} text={<Heart />} />
                 <div className={styles.header__content_right_user}>
                   {/* <Link to="/">
                   <User /> {user.name}

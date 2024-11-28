@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useSelector } from 'react-redux';
 
-import { About, CatalogPage, Home, Profile } from '../_pages/IndexPages';
+import { About, CatalogPage, FavoritesPage, Home, Profile } from '../_pages/IndexPages';
 const routesIndex = [
   {
     id: 1,
@@ -39,6 +39,15 @@ const routesIndex = [
     title: 'Каталог',
     type: 'public',
     isShowNav: true,
+    status: 'active',
+  },
+  {
+    id: 6,
+    path: '/profile/favorites',
+    element: <FavoritesPage />,
+    title: 'Избранные',
+    type: 'private',
+    isShowNav: false,
     status: 'active',
   },
 ];
