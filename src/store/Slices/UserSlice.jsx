@@ -2,9 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   user: {
-    name: 'Альберт Микаелян',
-    login: 'Ddyadz',
-    token: 'ssdadadadadad',
+    name: null,
+    login: null,
+    token: null,
+    favorites: [],
   },
 };
 
@@ -21,10 +22,14 @@ export const UserSlice = createSlice({
       state.user.name = null;
       state.user.login = null;
       state.user.token = null;
+      state.user.favorites = null;
+    },
+    setFavorite: (state, action) => {
+      state.user.favorites = action.payload.favorites;
     },
   },
 });
 
-export const { login, logout } = UserSlice.actions;
+export const { login, logout, setFavorite } = UserSlice.actions;
 
 export default UserSlice.reducer;

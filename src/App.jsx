@@ -7,8 +7,11 @@ import { ToastContainer } from 'react-toastify';
 import { Footer, Header } from './_components/IndexComponents';
 
 import { setProducts } from './store/Slices/ItemsSlice';
+import { setFavorite } from './store/Slices/UserSlice';
 
-import { useGetproducts } from './hooks/useGetProducts';
+import { useGetProducts } from './hooks/useProducts';
+import { useRoutes } from './hooks/useRoutes';
+import { useFavorites } from './hooks/useUser';
 
 import { ScrollToTop } from './utils/ScrollToTop';
 
@@ -18,17 +21,22 @@ import AppRoute from './routes/AppRoute';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
-import { useRoutes } from './hooks/useRoutes';
 
 function App() {
   const dispatch = useDispatch();
 
-  const { data, status } = useGetproducts();
+  const { data, status } = useGetProducts();
+  const { data: favorites } = useFavorites();
+
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(setProducts({ data, status }));
   }, [data]);
+
+  useEffect(() => {
+    dispatch(setFavorite({ favorites }));
+  }, [favorites]);
 
   const { routes } = useRoutes();
 

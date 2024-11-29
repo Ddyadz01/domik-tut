@@ -1,19 +1,54 @@
 import { NavLink } from 'react-router';
 
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { deleteFavorite, addFavorites } from '../../../services/user.service';
+
 import { Button, TextComponent } from '../../IndexComponents';
 
 import { Heart, MoveRight } from 'lucide-react';
+import { useSelector } from 'react-redux';
 
 import styles from './item-card.module.scss';
 
 export const ItemCard = ({ item }) => {
+  const queryClient = useQueryClient();
+
+  const mutationAdd = useMutation({
+    mutationFn: async (id) => {
+      await addFavorites(id);
+    },
+    onSuccess: () => queryClient.invalidateQueries(['favorites']),
+  });
+
+  const mutationDelete = useMutation({
+    mutationFn: async (id) => {
+      await deleteFavorite(id);
+    },
+    onSuccess: () => queryClient.invalidateQueries(['favorites']),
+  });
+
+  const { favorites } = useSelector((state) => state.user.user);
+
   return (
     <div className={styles.item__card}>
       <div className={styles.item__card_top}>
         <img src={item.imageURL} alt="Изображение дома" />
-        <div className={styles.item__card_top_favorite} onClick={() => console.log(item)}>
-          <Heart />
-        </div>
+        {favorites?.find((favorite) => favorite.item_id === item.id) ? (
+          <div
+            className={styles.item__card_top_is_favorite}
+            onClick={() => mutationDelete.mutate(item.id)}
+          >
+            <Heart />
+          </div>
+        ) : (
+          <div
+            className={styles.item__card_top_favorite}
+            onClick={() => mutationAdd.mutate(item.id)}
+          >
+            <Heart />
+          </div>
+        )}
       </div>
       <div className={styles.item__card_content}>
         <TextComponent size="lg" text={item.title} />
