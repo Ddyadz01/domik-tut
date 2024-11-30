@@ -2,7 +2,16 @@ import { useEffect, useState } from 'react';
 
 import { useSelector } from 'react-redux';
 
-import { About, CatalogPage, FavoritesPage, Home, Profile } from '../_pages/IndexPages';
+import {
+  About,
+  CatalogPage,
+  FavoritesPage,
+  Home,
+  LoginPage,
+  Profile,
+  RegisterPage,
+} from '../_pages/IndexPages';
+
 const routesIndex = [
   {
     id: 1,
@@ -48,6 +57,24 @@ const routesIndex = [
     title: 'Избранные',
     type: 'private',
     isShowNav: false,
+    status: 'active',
+  },
+  {
+    id: 7,
+    path: '/auth/register',
+    element: <RegisterPage />,
+    title: 'Регистрация',
+    type: 'public',
+    isShowNav: true,
+    status: 'active',
+  },
+  {
+    id: 8,
+    path: '/auth/login',
+    element: <LoginPage />,
+    title: 'Войти',
+    type: 'public',
+    isShowNav: true,
     status: 'active',
   },
 ];

@@ -1,3 +1,6 @@
+export { LoginPage } from './Auth/LoginPage/LoginPage';
+export { RegisterPage } from './Auth/RegisterPage/RegisterPage';
+
 export { About } from './About/About';
 export { Home } from './Home/Home';
 export { ProductPage } from './Product/ProductPage';
