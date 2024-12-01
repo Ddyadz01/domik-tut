@@ -11,7 +11,7 @@ export const NotFound = () => {
   // const location = useLocation();
   const navigate = useNavigate();
 
-  const redirectLink = location?.state?.from;
+  // const redirectLink = location?.state?.from;
 
   const { user } = useSelector((state) => state.user);
 
