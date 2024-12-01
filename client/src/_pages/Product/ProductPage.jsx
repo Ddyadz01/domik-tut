@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 import { CenterContent, Loader, TextComponent } from '../../_components/IndexComponents';
 import ProductInfoBottom from './ProductInfoBottom';
@@ -7,36 +7,15 @@ import ProductInfoTop from './ProductInfoTop';
 import { useCurrentProduct } from '../../hooks/useCurrentProduct';
 import { Play } from 'lucide-react';
 import styles from './product.module.scss';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { favoriteToggle } from '../../services/user.service';
 
 export const ProductPage = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const { id } = useParams();
 
   const product = useCurrentProduct(id);
-
-  const queryClient = useQueryClient();
-
   const videoRef = useRef();
-
-  const mutationAdd = useMutation({
-    mutationFn: async (id) => {
-      await favoriteToggle(id);
-    },
-    onSuccess: () => queryClient.invalidateQueries(['get me']),
-  });
-
-  const handleToggleFavorite = useCallback(() => {
-    if (isLoading) return;
-    setIsLoading(true);
-    mutationAdd.mutate(product._id, {
-      onSettled: () => setIsLoading(false),
-    });
-  }, [mutationAdd, isLoading]);
 
   const handleVideo = () => {
     if (videoRef.current) {
@@ -61,7 +40,7 @@ export const ProductPage = () => {
             </div>
             <CenterContent>
               <div className={styles.product__info}>
-                <ProductInfoTop handleToggleFavorite={handleToggleFavorite} product={product} />
+                <ProductInfoTop product={product} />
                 <ProductInfoContent product={product} />
                 <ProductInfoBottom product={product} />
                 <div className={styles.product__info_more}>

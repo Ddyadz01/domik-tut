@@ -5,9 +5,11 @@ import { ExternalLink, Heart } from 'lucide-react';
 import styles from '../product.module.scss';
 import { useCurrentProduct } from '../../../hooks/useCurrentProduct';
 import { useParams } from 'react-router';
+import { useToggleFavorite } from '../../../hooks/useToggleFavorite';
 
 const ProductButtons = () => {
   const { user } = useSelector((state) => state.user);
+  const { handleToggleFavorite } = useToggleFavorite();
   const { id } = useParams();
   const product = useCurrentProduct(id);
 
@@ -24,6 +26,7 @@ const ProductButtons = () => {
       />
       {user.token && (
         <Button
+          clickFn={() => handleToggleFavorite(product._id)}
           text={
             <>
               {favoriteButtonText}

@@ -3,10 +3,12 @@ import { TextComponent } from '../../_components/IndexComponents';
 import { ShareLinkProduct } from '../../utils/ShareLinkProduct';
 import { Heart, MapPin, Share2 } from 'lucide-react'; // Предположим, что HeartFill — это иконка для избранного
 import styles from './product.module.scss';
+import { useToggleFavorite } from '../../hooks/useToggleFavorite';
 
-const ProductInfoTop = ({ handleToggleFavorite, product }) => {
+const ProductInfoTop = ({ product }) => {
   const { user } = useSelector((state) => state.user);
   const { favorites } = useSelector((state) => state.user.user);
+  const { handleToggleFavorite } = useToggleFavorite();
   const isFavorite = favorites?.some((favorite) => favorite._id === product._id);
 
   return (
@@ -19,7 +21,7 @@ const ProductInfoTop = ({ handleToggleFavorite, product }) => {
         {user.token && (
           <Heart
             fill={isFavorite ? 'var(--color-primary)' : 'transparent'}
-            onClick={handleToggleFavorite}
+            onClick={() => handleToggleFavorite(product._id)}
             stroke={!isFavorite && 'var(--color-primary)'}
           />
         )}
