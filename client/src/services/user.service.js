@@ -22,4 +22,4 @@ class UserService {
   }
 }
 
-export const { favoriteToggle, deleteFavorite, SignUp, SignIn, GetMe } = new UserService();
+export const { favoriteToggle, SignUp, SignIn, GetMe } = new UserService();

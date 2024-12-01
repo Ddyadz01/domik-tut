@@ -1,90 +1,78 @@
 import { NavLink } from 'react-router';
-
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import { favoriteToggle } from '../../../services/user.service';
-
 import { Button, TextComponent } from '../../IndexComponents';
-
 import { Heart, MoveRight } from 'lucide-react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useCallback, useState } from 'react';
 
 import styles from './item-card.module.scss';
-import { incrementFavorite, decrementFavorite } from '../../../store/Slices/UserSlice';
+
+const FeatureInfo = ({ icon, text }) => (
+  <div className={styles.featureInfo}>
+    <img src={icon} alt={text} />
+    <TextComponent size="base" text={text} />
+  </div>
+);
 
 export const ItemCard = ({ item }) => {
-  const queryClient = useQueryClient();
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { favorites } = useSelector((state) => state.user.user);
 
+  const queryClient = useQueryClient();
+
   const mutationAdd = useMutation({
     mutationFn: async (id) => {
-      if (favorites.filter((favorite) => favorite._id === id).length > 0) {
-        dispatch(decrementFavorite(favorites.filter((favorite) => favorite._id !== id)));
-      } else {
-        dispatch(incrementFavorite(item));
-      }
       await favoriteToggle(id);
     },
     onSuccess: () => queryClient.invalidateQueries(['get me']),
   });
 
+  const handleToggleFavorite = useCallback(() => {
+    if (isLoading) return; // Предотвращение повторных кликов
+    setIsLoading(true);
+    mutationAdd.mutate(item._id, {
+      onSettled: () => setIsLoading(false), // Разблокировка кнопки после завершения запроса
+    });
+  }, [mutationAdd, item._id, isLoading]);
+
+  const isFavorite = favorites?.some((favorite) => favorite._id === item._id);
+
   return (
-    <div className={styles.item__card}>
-      <div className={styles.item__card_top}>
+    <div className={styles.card}>
+      <div className={styles.card__header}>
         <img src={item.imageURL} alt="Изображение дома" />
-        {favorites?.find((favorite) => favorite._id === item._id) ? (
-          <div
-            className={styles.item__card_top_is_favorite}
-            onClick={() => mutationAdd.mutate(item._id)}
-          >
-            <Heart />
-          </div>
-        ) : (
-          <div
-            className={styles.item__card_top_favorite}
-            onClick={() => mutationAdd.mutate(item._id)}
-          >
-            <Heart />
-          </div>
-        )}
+        <div
+          className={isFavorite ? styles.favoriteActive : styles.favorite}
+          onClick={isLoading ? '' : handleToggleFavorite}
+        >
+          <Heart />
+        </div>
       </div>
-      <div className={styles.item__card_content}>
+      <div className={styles.card__content}>
         <TextComponent size="lg" text={item.title} />
-        <div className={styles.item__card_content__list}>
+        <div className={styles.featuresList}>
           {item.persons_info.sleeping_places && (
-            <div className={styles.item__card_content__list_info}>
-              <img src="/icons/items_icons/icon_bed.png" />
-              <TextComponent
-                size="base"
-                text={`${item.persons_info.sleeping_places} cпальных мест`}
-              />
-            </div>
+            <FeatureInfo
+              icon="/icons/items_icons/icon_bed.png"
+              text={`${item.persons_info.sleeping_places} спальных мест`}
+            />
           )}
           {item.features.bathhouse && (
-            <div className={styles.item__card_content__list_info}>
-              <img src="/icons/items_icons/banya.png" />
-              <TextComponent size="base" text={'Баня'} />
-            </div>
+            <FeatureInfo icon="/icons/items_icons/banya.png" text="Баня" />
           )}
           {item.features.pool && (
-            <div className={styles.item__card_content__list_info}>
-              <img src="/icons/items_icons/icon_waterpool.png" />
-              <TextComponent size="base" text={'Бассейн'} />
-            </div>
+            <FeatureInfo icon="/icons/items_icons/icon_waterpool.png" text="Бассейн" />
           )}
           {item.features.table_tennis && (
-            <div className={styles.item__card_content__list_info}>
-              <img src="/icons/items_icons/icon_entertainment.png" />
-              <TextComponent size="base" text={'Настольный тенис'} />
-            </div>
+            <FeatureInfo icon="/icons/items_icons/icon_entertainment.png" text="Настольный тенис" />
           )}
         </div>
-        <div className={styles.item__card_content_bottom}>
+        <div className={styles.cardFooter}>
           <TextComponent text={`от ${item.tariffs.prices_info[0].price} ₽ / сутки`} size="lg" />
           <NavLink to={`/product/${item._id}`}>
-            <Button text={'Подробнее'} type={'line'} />
+            <Button text="Подробнее" type="line" />
             <MoveRight />
           </NavLink>
         </div>
