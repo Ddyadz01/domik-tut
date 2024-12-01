@@ -103,7 +103,6 @@ UserRouter.get('/me', chechAuth, async (req, res) => {
     token,
   });
 });
-
 UserRouter.put('/favorite/toggle/:id', chechAuth, async (req, res) => {
   const { id } = req.params;
   const { userID } = req;
@@ -120,22 +119,19 @@ UserRouter.put('/favorite/toggle/:id', chechAuth, async (req, res) => {
     const isFavorite = user.favorites.includes(id);
 
     if (isFavorite) {
-      user.favorites = user.favorites.filter((favoriteId) => favoriteId._id != id);
-      await user.save();
-      return res.json({
-        message: 'Товар удален из избранных',
-        favorites: user.favorites,
-      });
+      user.favorites = user.favorites.filter((favoriteId) => favoriteId !== id);
     } else {
       user.favorites.push(id);
-      await user.save();
-      return res.json({
-        message: 'Элемент добавлен в избранное',
-        favorites: user.favorites,
-      });
     }
+
+    await user.save(); // Сохранение изменений
+
+    return res.json({
+      message: isFavorite ? 'Товар удален из избранных' : 'Элемент добавлен в избранное',
+      favorites: user.favorites,
+    });
   } catch (error) {
-    console.log(error);
+    console.error('Ошибка при обновлении избранных:', error);
     return res.status(500).json({
       message: 'Ошибка сервера',
     });
