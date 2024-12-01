@@ -2,7 +2,7 @@ import axios from '../axios/axios';
 
 class ProductServices {
   getProducts() {
-    return axios.get(`/api/products`).then((res) => res.data);
+    return axios.get(`/products`).then((res) => res.data);
   }
 }
 

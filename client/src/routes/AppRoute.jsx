@@ -10,6 +10,7 @@ const AppRoute = ({ routes, user }) => {
     <Routes>
       <Route path="/product/:id" element={<ProductPage />} />
       <Route path="*" element={<NotFound />} />
+
       {routes.map((route) => (
         <Route
           key={route.id}

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 
 import { CenterContent } from '../../_components/IndexComponents';
@@ -8,7 +8,7 @@ import { CenterContent } from '../../_components/IndexComponents';
 import styles from './404.module.scss';
 
 export const NotFound = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
 
   const redirectLink = location?.state?.from;
@@ -16,8 +16,8 @@ export const NotFound = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    user?.token && navigate(redirectLink);
-  }, [user]);
+    user?.token ?? navigate(redirectLink);
+  }, [user, navigate, redirectLink]);
   return (
     <CenterContent>
       <div className={styles.not__found}>

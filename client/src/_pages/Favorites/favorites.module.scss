@@ -1,6 +1,13 @@
 .favorite__page {
   margin-top: 80px;
   .favorite__page_content {
-    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    &_message {
+      p {
+        margin-top: 50px;
+      }
+    }
   }
 }
