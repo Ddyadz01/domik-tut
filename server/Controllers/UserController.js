@@ -109,9 +109,7 @@ UserRouter.put('/favorite/toggle/:id', chechAuth, async (req, res) => {
   const { userID } = req;
 
   try {
-    const user = await User.findById(userID).populate({
-      path: 'favorites',
-    });
+    const user = await User.findById(userID);
 
     if (!user) {
       return res.status(404).json({
@@ -123,18 +121,21 @@ UserRouter.put('/favorite/toggle/:id', chechAuth, async (req, res) => {
 
     if (isFavorite) {
       user.favorites = user.favorites.filter((favoriteId) => favoriteId._id != id);
+      await user.save();
+      return res.json({
+        message: 'Товар удален из избранных',
+        favorites: user.favorites,
+      });
     } else {
       user.favorites.push(id);
+      await user.save();
+      return res.json({
+        message: 'Элемент добавлен в избранное',
+        favorites: user.favorites,
+      });
     }
-
-    await user.save(); // Сохранение изменений
-
-    return res.json({
-      message: isFavorite ? 'Товар удален из избранных' : 'Элемент добавлен в избранное',
-      favorites: user.favorites,
-    });
   } catch (error) {
-    console.error('Ошибка при обновлении избранных:', error);
+    console.log(error);
     return res.status(500).json({
       message: 'Ошибка сервера',
     });
