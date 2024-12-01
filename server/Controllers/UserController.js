@@ -87,6 +87,7 @@ UserRouter.post('/favorite/toggle', chechAuth, async (req, res) => {
   const user = await User.findById({ _id: userID }).populate({
     path: 'favorites',
   });
+
   if (!user) {
     return res.status(401).json({
       message: 'Ошибка доступа',
@@ -95,8 +96,9 @@ UserRouter.post('/favorite/toggle', chechAuth, async (req, res) => {
 
   const fillterFavorites = user.favorites.filter((favorite) => favorite._id == product_id);
 
-  if (fillterFavorites.length) {
-    const newListFavorites = user.favorites.filter((favorite) => favorite._id != product_id);
+  if (fillterFavorites.length > 0) {
+    console.log(fillterFavorites);
+    const newListFavorites = user?.favorites?.filter((favorite) => favorite._id !== product_id);
     user.favorites = newListFavorites;
     await user.save();
     return res.status(200).json({

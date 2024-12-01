@@ -28,9 +28,16 @@ export const UserSlice = createSlice({
       state.user.favorites = [];
       localStorage.removeItem('token');
     },
+    incrementFavorite: (state, action) => {
+      state.user.favorites = [...state.user.favorites, action.payload];
+    },
+    decrementFavorite: (state, action) => {
+      // state.user.favorites = [...state.user.favorites, ];
+      state.user.favorites = action.payload;
+    },
   },
 });
 
-export const { login, logout } = UserSlice.actions;
+export const { login, logout, incrementFavorite, decrementFavorite } = UserSlice.actions;
 
 export default UserSlice.reducer;

@@ -7,21 +7,29 @@ import { favoriteToggle } from '../../../services/user.service';
 import { Button, TextComponent } from '../../IndexComponents';
 
 import { Heart, MoveRight } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './item-card.module.scss';
+import { incrementFavorite, decrementFavorite } from '../../../store/Slices/UserSlice';
 
 export const ItemCard = ({ item }) => {
   const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+
+  const { favorites } = useSelector((state) => state.user.user);
 
   const mutationAdd = useMutation({
     mutationFn: async (id) => {
-      await favoriteToggle(id);
+      if (favorites.filter((favorite) => favorite._id === id).length > 0) {
+        dispatch(decrementFavorite(favorites.filter((favorite) => favorite._id !== id)));
+        await favoriteToggle(id);
+      } else {
+        dispatch(incrementFavorite(item));
+        await favoriteToggle(id);
+      }
     },
     onSuccess: () => queryClient.invalidateQueries(['get me']),
   });
-
-  const { favorites } = useSelector((state) => state.user.user);
 
   return (
     <div className={styles.item__card}>
