@@ -83,7 +83,7 @@ export const ItemCard = ({ item }) => {
         </div>
         <div className={styles.item__card_content_bottom}>
           <TextComponent text={`от ${item.tariffs.prices_info[0].price} ₽ / сутки`} size="lg" />
-          <NavLink to={`/product/${item.id}`}>
+          <NavLink to={`/product/${item._id}`}>
             <Button text={'Подробнее'} type={'line'} />
             <MoveRight />
           </NavLink>

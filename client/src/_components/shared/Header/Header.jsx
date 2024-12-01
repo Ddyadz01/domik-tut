@@ -49,7 +49,7 @@ export const Header = () => {
                     path="/profile"
                     text={
                       <>
-                        <User /> {user.name}
+                        <User /> {user.username}
                       </>
                     }
                   />

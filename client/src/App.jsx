@@ -7,11 +7,9 @@ import { ToastContainer } from 'react-toastify';
 import { Footer, Header } from './_components/IndexComponents';
 
 import { setProducts } from './store/Slices/ItemsSlice';
-import { setFavorite } from './store/Slices/UserSlice';
 
 import { useGetProducts } from './hooks/useProducts';
 import { useRoutes } from './hooks/useRoutes';
-import { useFavorites } from './hooks/useUser';
 
 import { ScrollToTop } from './utils/ScrollToTop';
 
@@ -26,17 +24,12 @@ function App() {
   const dispatch = useDispatch();
 
   const { data, status } = useGetProducts();
-  const { data: favorites } = useFavorites();
 
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(setProducts({ data, status }));
+    if (data) dispatch(setProducts({ data, status }));
   }, [data]);
-
-  useEffect(() => {
-    dispatch(setFavorite({ favorites }));
-  }, [favorites]);
 
   const { routes } = useRoutes();
 

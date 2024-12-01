@@ -21,6 +21,7 @@ const routesIndex = [
     type: 'public',
     isShowNav: true,
     status: 'active',
+    showAuthUsers: false,
   },
   {
     id: 2,
@@ -30,6 +31,7 @@ const routesIndex = [
     type: 'private',
     isShowNav: false,
     status: 'active',
+    showAuthUsers: false,
   },
 
   {
@@ -40,6 +42,7 @@ const routesIndex = [
     type: 'private',
     isShowNav: true,
     status: 'active',
+    showAuthUsers: false,
   },
   {
     id: 5,
@@ -49,6 +52,7 @@ const routesIndex = [
     type: 'public',
     isShowNav: true,
     status: 'active',
+    showAuthUsers: false,
   },
   {
     id: 6,
@@ -58,6 +62,7 @@ const routesIndex = [
     type: 'private',
     isShowNav: false,
     status: 'active',
+    showAuthUsers: false,
   },
   {
     id: 7,
@@ -67,6 +72,7 @@ const routesIndex = [
     type: 'public',
     isShowNav: true,
     status: 'active',
+    showAuthUsers: true,
   },
   {
     id: 8,
@@ -76,6 +82,7 @@ const routesIndex = [
     type: 'public',
     isShowNav: true,
     status: 'active',
+    showAuthUsers: true,
   },
 ];
 export const useRoutes = () => {
@@ -84,7 +91,7 @@ export const useRoutes = () => {
 
   useEffect(() => {
     if (user?.token) {
-      setRoutes(routesIndex.filter((route) => route.status === 'active'));
+      setRoutes(routesIndex.filter((route) => (route.status === 'active') & !route.showAuthUsers));
     } else {
       setRoutes(
         routesIndex.filter((route) => (route.status === 'active') & (route.type === 'public')),

@@ -1,9 +1,8 @@
-import axios from 'axios';
-const API = 'https://05a63f7766c02867.mokky.dev';
+import axios from '../axios/axios';
 
 class ProductServices {
   getProducts() {
-    return axios.get(`${API}/products`).then((res) => res.data);
+    return axios.get(`/api/products`).then((res) => res.data);
   }
 }
 

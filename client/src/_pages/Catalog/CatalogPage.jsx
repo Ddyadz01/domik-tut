@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import styles from './catalog.module.scss';
 
 export const CatalogPage = () => {
-  const { items } = useSelector((state) => state.items);
+  const { products } = useSelector((state) => state.items);
   return (
     <div className={styles.catalog__page}>
       <CenterContent>
@@ -12,7 +12,7 @@ export const CatalogPage = () => {
           <TextComponent text={'Каталог домов'} size="heading" />
         </div>
         <div className={styles.catalog__items}>
-          {items && items.map((product) => <ItemCard item={product} key={product.id} />)}
+          {products && products.map((product) => <ItemCard item={product} key={product.id} />)}
         </div>
       </CenterContent>
     </div>

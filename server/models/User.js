@@ -1,38 +1,30 @@
 import mongoose, { Schema } from 'mongoose';
 
 const UserModel = new Schema({
-  login: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
   last_name: {
     type: String,
+    required: true,
+  },
+  first_name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  phone_number: {
+    type: Number,
     required: true,
   },
   password: {
     type: String,
     required: true,
   },
-  balance: {
-    type: Number,
-    required: true,
-    default: 1000,
-  },
-  card: {
-    type: String,
-    default: 0,
-  },
-  typeTransfer: {
-    type: String,
-  },
-  transactions: [
+  favorites: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Transaction',
+      ref: 'Products',
     },
   ],
 });

@@ -14,7 +14,6 @@ import { Play } from 'lucide-react';
 
 import styles from './product.module.scss';
 
-
 export const ProductPage = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -30,12 +29,12 @@ export const ProductPage = () => {
   };
 
   useEffect(() => {
-    product && setTimeout(() => setIsLoaded(true), 200)
+    product ? setIsLoaded(true) : setIsLoaded(false);
   }, [product]);
 
   return (
-    <div  className={styles.product__page}>
-      {isLoaded ? (
+    <div className={styles.product__page}>
+      {isLoaded | product ? (
         <>
           <div className={styles.video_bg}>
             <CenterContent>
@@ -74,8 +73,10 @@ export const ProductPage = () => {
             </div>
           </CenterContent>
         </>
-      ) : (
+      ) : !isLoaded ? (
         <Loader />
+      ) : (
+        isLoaded | !product && 'Товар не найден'
       )}
     </div>
   );

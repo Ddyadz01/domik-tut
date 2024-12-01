@@ -9,9 +9,9 @@ const UserRouter = new Router();
 
 UserRouter.post('/register', async (req, res) => {
   try {
-    const { login, password, name, last_name } = req.body;
+    const { last_name, first_name, phone_number, email, password } = req.body;
 
-    const isUser = await User.findOne({ login });
+    const isUser = await User.findOne({ email });
 
     if (isUser) {
       return res.json({
@@ -22,22 +22,20 @@ UserRouter.post('/register', async (req, res) => {
     const hash = await bcrypt.hash(password, 10);
 
     const user = new User({
-      login,
-      password: hash,
-      name,
       last_name,
+      first_name,
+      phone_number,
+      email,
+      password: hash,
     });
 
     const token = jwt.sign({ _id: user._id }, 'secret1212121212', { expiresIn: '30m' });
 
     await user.save();
 
-    const AllUsers = await User.find({ _id: { $ne: user._id } });
-
     res.json({
       user,
       token,
-      AllUsers,
       message: 'Вы успешно зарегистрировались',
     });
   } catch (error) {
@@ -47,21 +45,22 @@ UserRouter.post('/register', async (req, res) => {
 
 UserRouter.post('/login', async (req, res) => {
   try {
-    const { login, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await User.findOne({ login }).populate({
-      path: 'transactions',
-      populate: [
-        {
-          path: 'to',
-          model: 'User',
-        },
-        {
-          path: 'from',
-          model: 'User',
-        },
-      ],
-    });
+    const user = await User.findOne({ email });
+    // .populate({
+    //   path: 'transactions',
+    //   populate: [
+    //     {
+    //       path: 'to',
+    //       model: 'User',
+    //     },
+    //     {
+    //       path: 'from',
+    //       model: 'User',
+    //     },
+    //   ],
+    // });
 
     if (!user) {
       return res.json({
@@ -79,12 +78,9 @@ UserRouter.post('/login', async (req, res) => {
 
     const token = jwt.sign({ _id: user._id }, 'secret1212121212', { expiresIn: '30m' });
 
-    const AllUsers = await User.find({ _id: { $ne: user._id } });
-
     res.json({
       user,
       token,
-      AllUsers,
       message: 'Вы успешно вошли',
     });
   } catch (error) {
@@ -95,19 +91,20 @@ UserRouter.post('/login', async (req, res) => {
 UserRouter.get('/me', chechAuth, async (req, res) => {
   const { userID } = req;
 
-  const user = await User.findById({ _id: userID }).populate({
-    path: 'transactions',
-    populate: [
-      {
-        path: 'to',
-        model: 'User',
-      },
-      {
-        path: 'from',
-        model: 'User',
-      },
-    ],
-  });
+  const user = await User.findById({ _id: userID });
+  // .populate({
+  //   path: 'transactions',
+  //   populate: [
+  //     {
+  //       path: 'to',
+  //       model: 'User',
+  //     },
+  //     {
+  //       path: 'from',
+  //       model: 'User',
+  //     },
+  //   ],
+  // });
 
   if (!user) {
     return res.status(401).json({

@@ -7,7 +7,7 @@ import {
 
 import styles from './home.module.scss';
 
-const PopularHomeComponent = ({ items }) => {
+const PopularHomeComponent = ({ products }) => {
   return (
     <div className={styles.popular__items}>
       <CenterContent>
@@ -21,9 +21,7 @@ const PopularHomeComponent = ({ items }) => {
             margin: '80px 0 40px 0',
           }}
         >
-          {items?.map((item) => (
-            <ItemCard item={item} key={item.id} />
-          ))}
+          {products && products?.map((item) => <ItemCard item={item} key={item.id} />)}
         </div>
         <LinkComponent text={'Перейти в каталог'} path={'/catalog'} type={'primary'} />
       </CenterContent>

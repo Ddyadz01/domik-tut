@@ -1,11 +1,32 @@
+import { useState } from 'react';
 import { Button, CenterContent, TextComponent } from '../../../_components/IndexComponents';
 
 import styles from './login.module.scss';
+import { useDispatch } from 'react-redux';
+import { useMutation } from '@tanstack/react-query';
+import { SignIn } from '../../../services/user.service';
+import { login } from '../../../store/Slices/UserSlice';
 
 export const LoginPage = () => {
-  const LoginHandle = (e) => {
+  const [form, setForm] = useState();
+
+  const dispatch = useDispatch();
+
+  const createAccount = (e) => {
     e.preventDefault();
-    console.log('tedfdd');
+    mutation.mutate(form);
+  };
+
+  const mutation = useMutation({
+    mutationFn: SignIn,
+    onSuccess: ({ data }) => dispatch(login(data)),
+  });
+
+  const changeHandler = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
   return (
     <div className={styles.login__page}>
@@ -15,13 +36,24 @@ export const LoginPage = () => {
           <form>
             <label>
               Введите электронную почту (email)
-              <input placeholder="Email" type="email" name="email" autoComplete="no" />
+              <input
+                placeholder="Email"
+                type="email"
+                name="email"
+                autoComplete="no"
+                onChange={(e) => changeHandler(e)}
+              />
             </label>
             <label>
               Введите пароль
-              <input placeholder="Пароль" type="password" name="password" />
+              <input
+                placeholder="Пароль"
+                type="password"
+                name="password"
+                onChange={(e) => changeHandler(e)}
+              />
             </label>
-            <Button text={'Войти'} type={'primary'} clickFn={(e) => LoginHandle(e)} />
+            <Button text={'Войти'} type={'primary'} clickFn={(e) => createAccount(e)} />
           </form>
         </div>
       </CenterContent>

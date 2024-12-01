@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import { login, logout } from "../../store/Slices/UserSlice";
+import { logout } from '../../store/Slices/UserSlice';
 
-import { Button } from "../../_components/IndexComponents";
+import { Button } from '../../_components/IndexComponents';
 
-import styles from "./development.module.scss";
-import { useRef, useState } from "react";
+import styles from './development.module.scss';
+import { useState } from 'react';
 
 const HeaderDevelopment = () => {
   const [isShowHeader, setShowHeader] = useState(true);
@@ -17,33 +17,27 @@ const HeaderDevelopment = () => {
       <div className={styles.dev}>
         <div className={styles.dev__content}>
           <div className={styles.dev__content_left}>
-            <p
-              style={{ fontSize: "16px", fontWeight: "bold", margin: "0 10px" }}
-            >
+            <p style={{ fontSize: '16px', fontWeight: 'bold', margin: '0 10px' }}>
               Функции в Dev Mode:
             </p>
             {token ? (
               <Button
-                text={"Выйти из системы"}
-                type={"default-primary"}
+                text={'Выйти из системы'}
+                type={'default-primary'}
                 clickFn={() => dispatch(logout())}
               />
             ) : (
               <>
-                <Button
+                {/* <Button
                   text={"Вход в систему"}
                   type={"default"}
                   clickFn={() => dispatch(login())}
-                />
+                /> */}
               </>
             )}
           </div>
           <div className={styles.dev__content_seetings}>
-            <Button
-              text={"Закрыть"}
-              type={"default"}
-              clickFn={() => setShowHeader(false)}
-            />
+            <Button text={'Закрыть'} type={'default'} clickFn={() => setShowHeader(false)} />
           </div>
         </div>
       </div>

@@ -6,12 +6,12 @@ import HomeOptionsComponent from './HomeOptionsComponent';
 import PopularHomeComponent from './PopularHomeComponent';
 
 export const Home = () => {
-  const { items } = useSelector((state) => state.items);
+  const { products } = useSelector((state) => state.items);
   return (
     <div className="home_page">
       <HomeComponent />
       <AboutComponent />
-      <PopularHomeComponent items={items} />
+      <PopularHomeComponent products={products} />
       <HomeOptionsComponent />
     </div>
   );
