@@ -16,8 +16,8 @@ export const NotFound = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    user?.token ?? navigate(redirectLink);
-  }, [user, navigate, redirectLink]);
+    user?.token ? navigate('/profile') : navigate('/auth/login');
+  }, [user, navigate]);
   return (
     <CenterContent>
       <div className={styles.not__found}>
