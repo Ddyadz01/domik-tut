@@ -23,12 +23,11 @@
     &_btns {
       svg {
         margin-left: 20px;
-        stroke: var(--color-primary);
         cursor: pointer;
-        fill: transparent;
         transition: all 0.3s;
+        stroke: var(--color-primary);
         &:hover {
-          fill: var(--color-primary);
+          color: var(--color-primary);
         }
       }
     }

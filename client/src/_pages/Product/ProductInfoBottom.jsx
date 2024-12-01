@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { TextComponent } from '../../_components/IndexComponents';
 
 import ProductPrice from './ProductPriceInfo/ProductPrice';
