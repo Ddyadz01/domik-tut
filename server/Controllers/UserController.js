@@ -97,7 +97,7 @@ UserRouter.post('/favorite/toggle', chechAuth, async (req, res) => {
   const fillterFavorites = user.favorites.filter((favorite) => favorite._id == product_id);
 
   if (fillterFavorites.length > 0) {
-    const newListFavorites = user?.favorites?.filter((favorite) => favorite._id !== product_id);
+    const newListFavorites = user.favorites.filter((favorite) => favorite._id !== product_id);
     console.log('Обновленный список после удаленич: ', newListFavorites);
     user.favorites = newListFavorites;
     await user.save();
