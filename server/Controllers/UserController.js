@@ -103,12 +103,15 @@ UserRouter.get('/me', chechAuth, async (req, res) => {
     token,
   });
 });
+
 UserRouter.put('/favorite/toggle/:id', chechAuth, async (req, res) => {
   const { id } = req.params;
   const { userID } = req;
 
   try {
-    const user = await User.findById(userID);
+    const user = await User.findById(userID).populate({
+      path: 'favorites',
+    });
 
     if (!user) {
       return res.status(404).json({
@@ -119,7 +122,7 @@ UserRouter.put('/favorite/toggle/:id', chechAuth, async (req, res) => {
     const isFavorite = user.favorites.includes(id);
 
     if (isFavorite) {
-      user.favorites = user.favorites.filter((favoriteId) => favoriteId !== id);
+      user.favorites = user.favorites.filter((favoriteId) => favoriteId._id != id);
     } else {
       user.favorites.push(id);
     }
