@@ -1,4 +1,4 @@
-import axios from '../axios/axios';
+import axios from "../axios/axios";
 
 class UserService {
   async favoriteToggle(id) {

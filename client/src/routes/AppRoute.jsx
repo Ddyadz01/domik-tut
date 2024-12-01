@@ -1,7 +1,7 @@
-import React from 'react';
-import { Route, Routes } from 'react-router';
-import PrivateRoutes from './PrivateRoutes';
-import { NotFound, ProductPage } from '../_pages/IndexPages';
+import React from "react";
+import { Route, Routes } from "react-router";
+import PrivateRoutes from "./PrivateRoutes";
+import { NotFound, ProductPage } from "../_pages/IndexPages";
 
 // eslint-disable-next-line react/display-name
 const AppRoute = React.memo(({ routes, user }) => {
@@ -15,7 +15,7 @@ const AppRoute = React.memo(({ routes, user }) => {
           key={route.id}
           path={route.path}
           element={
-            route.type === 'private' ? (
+            route.type === "private" ? (
               <PrivateRoutes user={user}>{route.element}</PrivateRoutes>
             ) : (
               route.element

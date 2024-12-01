@@ -1,13 +1,17 @@
-import { useState } from 'react';
-import { Button, CenterContent, TextComponent } from '../../../_components/IndexComponents';
+import { useState } from "react";
+import {
+  Button,
+  CenterContent,
+  TextComponent,
+} from "../../../_components/IndexComponents";
 
-import { useMutation } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
+import { useMutation } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
 
-import { SignUp } from '../../../services/user.service';
-import { login } from '../../../store/Slices/UserSlice';
+import { SignUp } from "../../../services/user.service";
+import { login } from "../../../store/Slices/UserSlice";
 
-import styles from './register.module.scss';
+import styles from "./register.module.scss";
 
 export const RegisterPage = () => {
   const [form, setForm] = useState();
@@ -35,7 +39,7 @@ export const RegisterPage = () => {
     <div className={styles.register__page}>
       <CenterContent>
         <div className={styles.register__page_content}>
-          <TextComponent text={'Регистрация пользователя'} size={'heading'} />
+          <TextComponent text={"Регистрация пользователя"} size={"heading"} />
           <form>
             <label>
               Имя
@@ -86,7 +90,11 @@ export const RegisterPage = () => {
                 onChange={(e) => changeHandler(e)}
               />
             </label>
-            <Button text={'Создать аккаунт'} type={'primary'} clickFn={(e) => createAccount(e)} />
+            <Button
+              text={"Создать аккаунт"}
+              style={"primary"}
+              clickFn={(e) => createAccount(e)}
+            />
           </form>
         </div>
       </CenterContent>

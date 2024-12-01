@@ -90,7 +90,12 @@ $spacing: 20px;
 
       .user {
         margin-left: $spacing;
-
+        display: flex;
+        align-items: center;
+        button {
+          height: 44px;
+          margin-left: 20px;
+        }
         a {
           p {
             display: flex;

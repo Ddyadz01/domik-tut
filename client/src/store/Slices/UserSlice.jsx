@@ -1,32 +1,37 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: {
     username: null,
     email: null,
     token: null,
+    phone: null,
     favorites: [],
   },
 };
 
 export const UserSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     login: (state, action) => {
       state.user.username =
-        action?.payload?.user?.last_name + ' ' + action?.payload?.user?.first_name;
+        action?.payload?.user?.last_name +
+        " " +
+        action?.payload?.user?.first_name;
       state.user.email = action?.payload?.user?.email;
+      state.user.phone = action?.payload?.user?.phone_number;
       state.user.token = action?.payload?.token;
       state.user.favorites = action?.payload?.user?.favorites;
-      localStorage.setItem('token', action?.payload?.token);
+      localStorage.setItem("token", action?.payload?.token);
     },
     logout: (state) => {
       state.user.username = null;
       state.user.email = null;
       state.user.token = null;
+      state.user.phone = null;
       state.user.favorites = [];
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
     },
   },
 });

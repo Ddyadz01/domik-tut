@@ -1,11 +1,16 @@
-import { TextComponent } from '../../IndexComponents';
+import { TextComponent } from "../../IndexComponents";
 
-import './button.scss';
+import "./button.scss";
 
-export const Button = ({ type, text, clickFn }) => {
+export const Button = ({ style, text, clickFn, disabled, type }) => {
   return (
-    <button className={'button ' + type} onClick={clickFn}>
-      <TextComponent size={'base'} text={text} />
+    <button
+      className={"button " + style}
+      onClick={clickFn}
+      disabled={disabled}
+      type={type}
+    >
+      <TextComponent size={"base"} text={text} />
     </button>
   );
 };

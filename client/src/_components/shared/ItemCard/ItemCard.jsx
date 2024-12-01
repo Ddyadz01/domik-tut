@@ -1,12 +1,12 @@
-import { NavLink } from 'react-router';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { favoriteToggle } from '../../../services/user.service';
-import { Button, TextComponent } from '../../IndexComponents';
-import { Heart, MoveRight } from 'lucide-react';
-import { useSelector } from 'react-redux';
-import { useCallback, useState } from 'react';
+import { NavLink } from "react-router";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { favoriteToggle } from "../../../services/user.service";
+import { Button, TextComponent } from "../../IndexComponents";
+import { Heart, MoveRight } from "lucide-react";
+import { useSelector } from "react-redux";
+import { useCallback, useState } from "react";
 
-import styles from './item-card.module.scss';
+import styles from "./item-card.module.scss";
 
 const FeatureInfo = ({ icon, text }) => (
   <div className={styles.featureInfo}>
@@ -26,7 +26,7 @@ export const ItemCard = ({ item }) => {
     mutationFn: async (id) => {
       await favoriteToggle(id);
     },
-    onSuccess: () => queryClient.invalidateQueries(['get me']),
+    onSuccess: () => queryClient.invalidateQueries(["get me"]),
   });
 
   const handleToggleFavorite = useCallback(() => {
@@ -45,7 +45,7 @@ export const ItemCard = ({ item }) => {
         <img src={item.imageURL} alt="Изображение дома" />
         <div
           className={isFavorite ? styles.favoriteActive : styles.favorite}
-          onClick={isLoading ? '' : handleToggleFavorite}
+          onClick={isLoading ? "" : handleToggleFavorite}
         >
           <Heart />
         </div>
@@ -63,16 +63,25 @@ export const ItemCard = ({ item }) => {
             <FeatureInfo icon="/icons/items_icons/banya.png" text="Баня" />
           )}
           {item.features.pool && (
-            <FeatureInfo icon="/icons/items_icons/icon_waterpool.png" text="Бассейн" />
+            <FeatureInfo
+              icon="/icons/items_icons/icon_waterpool.png"
+              text="Бассейн"
+            />
           )}
           {item.features.table_tennis && (
-            <FeatureInfo icon="/icons/items_icons/icon_entertainment.png" text="Настольный тенис" />
+            <FeatureInfo
+              icon="/icons/items_icons/icon_entertainment.png"
+              text="Настольный тенис"
+            />
           )}
         </div>
         <div className={styles.cardFooter}>
-          <TextComponent text={`от ${item.tariffs.prices_info[0].price} ₽ / сутки`} size="lg" />
+          <TextComponent
+            text={`от ${item.tariffs.prices_info[0].price} ₽ / сутки`}
+            size="lg"
+          />
           <NavLink to={`/product/${item._id}`}>
-            <Button text="Подробнее" type="line" />
+            <Button text="Подробнее" style="line" />
             <MoveRight />
           </NavLink>
         </div>
