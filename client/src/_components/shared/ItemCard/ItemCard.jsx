@@ -22,11 +22,10 @@ export const ItemCard = ({ item }) => {
     mutationFn: async (id) => {
       if (favorites.filter((favorite) => favorite._id === id).length > 0) {
         dispatch(decrementFavorite(favorites.filter((favorite) => favorite._id !== id)));
-        await favoriteToggle(id);
       } else {
         dispatch(incrementFavorite(item));
-        await favoriteToggle(id);
       }
+      await favoriteToggle(id);
     },
     onSuccess: () => queryClient.invalidateQueries(['get me']),
   });
