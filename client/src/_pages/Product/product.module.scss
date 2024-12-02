@@ -346,6 +346,14 @@
           display: none;
          }
       }
+      &_content {
+        &_left {
+          width: 70%;
+       }
+       &_right { 
+        width: 30%;
+       }
+     }
   }
   
 }
