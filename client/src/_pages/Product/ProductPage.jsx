@@ -35,7 +35,7 @@ export const ProductPage = () => {
           <>
             <div className={styles.video_bg}>
               <CenterContent>
-                <video autoPlay poster={product.imageURL} src={product.videoURL} muted loop />
+                <video autoPlay poster={product.imageURL} playsinline src={product.videoURL} muted loop />
               </CenterContent>
             </div>
             <CenterContent>
