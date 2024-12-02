@@ -334,7 +334,7 @@
         }
       }
     &__table_col {
-    tbody{ flex-direction: column;}
+    tbody{ tr {flex-direction: column; } }
     }
    }
    &_info_price {
