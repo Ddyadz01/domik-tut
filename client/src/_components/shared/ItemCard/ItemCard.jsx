@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useCallback, useState } from "react";
 
 import styles from "./item-card.module.scss";
+import Notification from "../../../utils/Notification";
 
 const FeatureInfo = ({ icon, text }) => (
   <div className={styles.featureInfo}>
@@ -18,7 +19,7 @@ const FeatureInfo = ({ icon, text }) => (
 export const ItemCard = ({ item }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const { favorites } = useSelector((state) => state.user.user);
+  const { user } = useSelector((state) => state.user);
 
   const queryClient = useQueryClient();
 
@@ -37,7 +38,15 @@ export const ItemCard = ({ item }) => {
     });
   }, [mutationAdd, item._id, isLoading]);
 
-  const isFavorite = favorites?.some((favorite) => favorite._id === item._id);
+  const isFavorite = user?.favorites?.some(
+    (favorite) => favorite._id === item._id,
+  );
+
+  const clickFavoriteBtn = () => {
+    user?.token
+      ? handleToggleFavorite()
+      : Notification("Войдите, чтоб добавить товар в избранные.", "warning");
+  };
 
   return (
     <div className={styles.card}>
@@ -45,7 +54,7 @@ export const ItemCard = ({ item }) => {
         <img src={item.imageURL} alt="Изображение дома" />
         <div
           className={isFavorite ? styles.favoriteActive : styles.favorite}
-          onClick={isLoading ? "" : handleToggleFavorite}
+          onClick={isLoading ? "" : clickFavoriteBtn}
         >
           <Heart />
         </div>

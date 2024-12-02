@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:4000/api",
-  //https://domik-tut.onrender.com/api
+  baseURL: "https://domik-tut.onrender.com/api",
+  //http://localhost:4000/api
 });
 
 instance.interceptors.request.use((config) => {

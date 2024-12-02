@@ -1,5 +1,3 @@
-import React from "react";
-
 import { TextComponent } from "../../../_components/IndexComponents";
 
 import styles from "../product.module.scss";
