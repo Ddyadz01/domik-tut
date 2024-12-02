@@ -122,7 +122,6 @@
           }
           tr {
             height: 40px;
-
             td {
               p {
                 justify-content: left;
@@ -333,20 +332,44 @@
           height: auto;
         }
       }
+      &__table_col {
+        tbody {
+          tr {
+            flex-direction: column;
+            display: flex;
+            height: auto;
+            td {
+              width: 100% !important;
+              margin: 10px 0;
+            }
+          }
+        }
+      }
     }
     &_info_price {
       width: 100%;
       padding: 20px;
+      margin-top: 22px;
       &_buttons {
         button {
-          font-size: 12px;
-          padding: 7px 13px !important;
+          padding: 10px 14px !important;
+          p {
+            font-size: 14px !important;
+          }
         }
         .btn_share {
           display: none;
         }
       }
+      &_options_item {
+        p {
+          font-size: 14px !important;
+        }
+      }
       &_content {
+        p {
+          font-size: 15px !important;
+        }
         &_left {
           width: 70%;
         }
