@@ -67,7 +67,7 @@ UserRouter.post('/login', async (req, res) => {
     res.json({
       user,
       token,
-      message: 'Вы успешно вошли',
+      message: `${user.last_name}, Добро пожаловать.`,
     });
   } catch (error) {
     console.error('Ошибка при входе:', error);
