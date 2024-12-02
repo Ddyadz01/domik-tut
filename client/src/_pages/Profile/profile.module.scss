@@ -5,3 +5,12 @@
     width: 20%;
   }
 }
+
+@media (max-width: 450px) {
+  .profile {
+    width: 100%;
+    form {
+      width: 100%;
+    }
+  }
+}
