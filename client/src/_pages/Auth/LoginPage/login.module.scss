@@ -44,3 +44,15 @@
     }
   }
 }
+
+@media (max-width: 450px) {
+  .login__page_content {
+    width: 100%;
+    form {
+      width: 100%;
+    }
+    // .headerContent {
+    //   width: 100%;
+    // }
+  }
+}

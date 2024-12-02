@@ -128,3 +128,15 @@ $spacing: 20px;
     cursor: pointer;
   }
 }
+
+@media (max-width: 450px) {
+  .header {
+    width: 100%;
+    .headerContent {
+      width: 100%;
+      .headerCenter {
+        display: none;
+      }
+    }
+  }
+}
