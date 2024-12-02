@@ -38,7 +38,7 @@ const ProductButtons = () => {
           style={favoriteButtonType}
         />
       )}
-        <div className={style.btn_share} >
+        <div className={styles.btn_share}>
             <Button
         clickFn={ShareLinkProduct}
         text={
