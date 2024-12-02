@@ -337,10 +337,13 @@
    &_info_price {
      width:100%;
         &_buttons {
-button {
-font-size: 12px;
-         padding: 5px !important;
-}
+          button {
+           font-size: 12px;
+           padding: 5px !important;
+          }
+         .btn_share {
+          display: none;
+         }
          
       }
    }
