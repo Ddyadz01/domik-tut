@@ -337,8 +337,11 @@
    &_info_price {
      width:100%;
         &_buttons {
-         font-size: 12px;
+button {
+font-size: 12px;
          padding: 5px !important;
+}
+         
       }
    }
   }
