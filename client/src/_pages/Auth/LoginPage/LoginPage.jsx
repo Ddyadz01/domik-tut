@@ -23,7 +23,7 @@ export const LoginPage = () => {
 
   const mutation = useMutation({
     mutationFn: SignIn,
-    onSuccess: ({ data }) => dispatch(login(data)),
+    onSuccess: (data) => dispatch(login(data)),
   });
 
   const changeHandler = (e) => {

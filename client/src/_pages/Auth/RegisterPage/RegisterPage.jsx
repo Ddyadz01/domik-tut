@@ -25,7 +25,7 @@ export const RegisterPage = () => {
 
   const mutation = useMutation({
     mutationFn: SignUp,
-    onSuccess: ({ data }) => dispatch(login(data)),
+    onSuccess: (data) => dispatch(login(data)),
   });
 
   const changeHandler = (e) => {

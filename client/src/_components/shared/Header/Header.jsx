@@ -20,7 +20,6 @@ export const Header = () => {
         <div className={styles.headerContent}>
           <div className={styles.headerLeft}>
             <img src="/logo-white.png" alt="Company Logo" />
-            <Button text="Каталог" style="default" />
           </div>
 
           <div className={styles.headerCenter}>

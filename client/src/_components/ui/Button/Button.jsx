@@ -2,7 +2,7 @@ import { TextComponent } from "../../IndexComponents";
 
 import "./button.scss";
 
-export const Button = ({ style, text, clickFn, disabled, type }) => {
+export const Button = ({ style, text, clickFn, type, disabled }) => {
   return (
     <button
       className={"button " + style}

@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { chechAuth } from '../utils/CheckAuth.js';
 
 import Products from '../models/Products.js';
 

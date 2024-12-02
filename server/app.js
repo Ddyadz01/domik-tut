@@ -3,6 +3,9 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import UserRouter from './Controllers/UserController.js';
 import ProductsRouter from './Controllers/Products.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 

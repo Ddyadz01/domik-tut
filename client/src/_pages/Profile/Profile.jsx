@@ -28,8 +28,7 @@ export const Profile = () => {
             <input type="text" value={user.phone} />
           </label>
           <Button
-            disabled={false}
-            clickFn={false}
+            disabled={true}
             style={"primary"}
             type={"button"}
             text={"Сохранить"}

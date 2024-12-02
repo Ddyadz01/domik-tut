@@ -17,6 +17,11 @@ button {
   // }
 }
 
+button:disabled {
+  background-color: #68686826 !important;
+  cursor: default;
+}
+
 .button.default {
   background-color: none;
   border: 1px solid var(--color-gray);

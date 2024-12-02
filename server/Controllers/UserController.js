@@ -3,26 +3,26 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import User from '../models/User.js';
-import { chechAuth } from '../utils/CheckAuth.js';
+import { checkAuth } from '../utils/checkAuth.js';
 
 const UserRouter = new Router();
+
+// Функция для генерации JWT
+const generateToken = (userId) => {
+  return jwt.sign({ _id: userId }, process.env.JWT_SECRET, { expiresIn: '30m' });
+};
 
 UserRouter.post('/register', async (req, res) => {
   try {
     const { last_name, first_name, phone_number, email, password } = req.body;
 
-    // Проверка, существует ли пользователь с таким email
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({
-        message: 'Логин уже занят',
-      });
+      return res.status(400).json({ message: 'Логин уже занят' });
     }
 
-    // Хеширование пароля
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Создание нового пользователя
     const newUser = new User({
       last_name,
       first_name,
@@ -31,13 +31,10 @@ UserRouter.post('/register', async (req, res) => {
       password: hashedPassword,
     });
 
-    // Генерация JWT
-    const token = jwt.sign({ _id: newUser._id }, 'secret1212121212', { expiresIn: '30m' });
-
-    // Сохранение пользователя в базе данных
     await newUser.save();
 
-    // Ответ клиенту
+    const token = generateToken(newUser._id);
+
     res.status(201).json({
       user: newUser,
       token,
@@ -45,9 +42,7 @@ UserRouter.post('/register', async (req, res) => {
     });
   } catch (error) {
     console.error('Ошибка при регистрации:', error);
-    res.status(500).json({
-      message: 'Ошибка сервера. Попробуйте позже.',
-    });
+    res.status(500).json({ message: 'Ошибка сервера. Попробуйте позже.' });
   }
 });
 
@@ -55,24 +50,19 @@ UserRouter.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email }).populate({
-      path: 'favorites',
-    });
+    const user = await User.findOne({ email }).populate('favorites');
 
     if (!user) {
-      return res.status(400).json({
-        message: 'Пользователь не существует',
-      });
-    }
-    const hashedPassword = await bcrypt.compare(password, user.password);
-
-    if (!hashedPassword) {
-      return res.json({
-        message: 'Неправильный логин или пароль',
-      });
+      return res.status(400).json({ message: 'Пользователь не существует' });
     }
 
-    const token = jwt.sign({ _id: user._id }, 'secret1212121212', { expiresIn: '30m' });
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ message: 'Неправильный логин или пароль' });
+    }
+
+    const token = generateToken(user._id);
 
     res.json({
       user,
@@ -80,31 +70,33 @@ UserRouter.post('/login', async (req, res) => {
       message: 'Вы успешно вошли',
     });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      message: 'Ошибка сервера',
-    });
+    console.error('Ошибка при входе:', error);
+    res.status(500).json({ message: 'Ошибка сервера' });
   }
 });
 
-UserRouter.get('/me', chechAuth, async (req, res) => {
-  const { userID } = req;
-  const user = await User.findById({ _id: userID }).populate({
-    path: 'favorites',
-  });
-  if (!user) {
-    return res.status(401).json({
-      message: 'Ошибка доступа',
+UserRouter.get('/me', checkAuth, async (req, res) => {
+  try {
+    const { userID } = req;
+    const user = await User.findById(userID).populate('favorites');
+
+    if (!user) {
+      return res.status(401).json({ message: 'Ошибка доступа' });
+    }
+
+    const token = generateToken(user._id);
+
+    res.json({
+      user,
+      token,
     });
+  } catch (error) {
+    console.error('Ошибка при получении данных пользователя:', error);
+    res.status(500).json({ message: 'Ошибка сервера' });
   }
-  const token = jwt.sign({ _id: user._id }, 'secret1212121212', { expiresIn: '30m' });
-  res.json({
-    user,
-    token,
-  });
 });
 
-UserRouter.put('/favorite/toggle/:id', chechAuth, async (req, res) => {
+UserRouter.put('/favorite/toggle/:id', checkAuth, async (req, res) => {
   const { id } = req.params;
   const { userID } = req;
 
@@ -137,7 +129,7 @@ UserRouter.put('/favorite/toggle/:id', chechAuth, async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: 'Ошибка сервера',
+      message: 'Произошла ошибка',
     });
   }
 });

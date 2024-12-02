@@ -1,7 +1,7 @@
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 
-export const chechAuth = async (req, res, next) => {
+export const checkAuth = async (req, res, next) => {
   try {
     const token = (req.headers.authorization || '').replace(/Bearer\s?/, '');
 
@@ -11,7 +11,7 @@ export const chechAuth = async (req, res, next) => {
       });
     }
 
-    const decoded = jwt.verify(token, 'secret1212121212');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await User.findById({ _id: decoded._id });
     if (!user) {
