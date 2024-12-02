@@ -38,7 +38,8 @@ const ProductButtons = () => {
           style={favoriteButtonType}
         />
       )}
-      <Button
+        .btn_share {
+            <Button
         clickFn={ShareLinkProduct}
         text={
           <>
@@ -48,6 +49,7 @@ const ProductButtons = () => {
         }
         style={"default"}
       />
+        }
     </div>
   );
 };
