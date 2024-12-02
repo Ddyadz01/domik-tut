@@ -142,7 +142,7 @@
         display: flex;
         justify-content: space-between;
         p {
-          font-family: 'Montserrat', sans-serif;
+          font-family: "Montserrat", sans-serif;
         }
 
         svg {
@@ -295,7 +295,7 @@
   z-index: -1;
   width: 100%;
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -312,8 +312,8 @@
   }
 }
 
-@media(max-width: 450px) {
- .product__info_bottom {
+@media (max-width: 450px) {
+  .product__info_bottom {
     flex-direction: column;
     &_info_house {
       width: 100%;
@@ -333,29 +333,27 @@
           height: auto;
         }
       }
-   }
-   &_info_price {
-     width:100%;
-     padding: 20px;
-        &_buttons {
-          button {
-           font-size: 12px;
-           padding: 7px 13px !important;
-          }
-         .btn_share {
+    }
+    &_info_price {
+      width: 100%;
+      padding: 20px;
+      &_buttons {
+        button {
+          font-size: 12px;
+          padding: 7px 13px !important;
+        }
+        .btn_share {
           display: none;
-         }
+        }
       }
       &_content {
         &_left {
           width: 70%;
-       }
-       &_right { 
-        width: 30%;
-       }
-     }
+        }
+        &_right {
+          width: 30%;
+        }
+      }
+    }
   }
-  
 }
-}
-

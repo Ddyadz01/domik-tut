@@ -38,18 +38,18 @@ const ProductButtons = () => {
           style={favoriteButtonType}
         />
       )}
-        <div className={styles.btn_share}>
-            <Button
-        clickFn={ShareLinkProduct}
-        text={
-          <>
-            Поделиться
-            <ExternalLink />
-          </>
-        }
-        style={"default"}
-      />
-        </div>
+      <div className={styles.btn_share}>
+        <Button
+          clickFn={ShareLinkProduct}
+          text={
+            <>
+              Поделиться
+              <ExternalLink />
+            </>
+          }
+          style={"default"}
+        />
+      </div>
     </div>
   );
 };
