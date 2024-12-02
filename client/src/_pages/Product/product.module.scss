@@ -311,3 +311,11 @@
     position: relative;
   }
 }
+
+@media(max-width: 450px) {
+ .product__info_bottom {
+  flex-direction: column;
+}
+}
+
+
