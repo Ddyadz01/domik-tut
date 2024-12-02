@@ -333,6 +333,9 @@
           height: auto;
         }
       }
+    &__table_col {
+    tbody{ flex-direction: column;}
+    }
    }
    &_info_price {
      width:100%;
