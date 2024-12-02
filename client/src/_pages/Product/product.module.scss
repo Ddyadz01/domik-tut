@@ -336,10 +336,11 @@
    }
    &_info_price {
      width:100%;
+     padding: 20px;
         &_buttons {
           button {
            font-size: 12px;
-           padding: 7px 10px !important;
+           padding: 7px 13px !important;
           }
          .btn_share {
           display: none;
