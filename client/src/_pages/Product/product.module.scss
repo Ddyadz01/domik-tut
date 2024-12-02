@@ -314,8 +314,26 @@
 
 @media(max-width: 450px) {
  .product__info_bottom {
-  flex-direction: column;
-}
+    flex-direction: column;
+    &_info_house {
+      width: 100%;
+      &__table_row {
+        width: 100%;
+        thead {
+          tr {
+            th:first-child {
+              width: auto;
+            }
+            th {
+              width: auto;
+            }
+          }
+        }
+        tbody {
+          height: auto;
+        }
+      }
+ }
 }
 
 
