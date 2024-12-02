@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   Button,
   CenterContent,
+  Loader,
   TextComponent,
 } from "../../../_components/IndexComponents";
 
@@ -15,17 +16,22 @@ import styles from "./register.module.scss";
 
 export const RegisterPage = () => {
   const [form, setForm] = useState();
+  const [isLoading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   const createAccount = (e) => {
     e.preventDefault();
+    setLoading(true);
     mutation.mutate(form);
   };
 
   const mutation = useMutation({
     mutationFn: SignUp,
-    onSuccess: (data) => dispatch(login(data)),
+    onSuccess: (data) => {
+      dispatch(login(data));
+      setLoading(false);
+    },
   });
 
   const changeHandler = (e) => {
@@ -91,9 +97,16 @@ export const RegisterPage = () => {
               />
             </label>
             <Button
-              text={"Создать аккаунт"}
+              text={
+                isLoading ? (
+                  <Loader height={30} width={30} />
+                ) : (
+                  "Создать аккаунт"
+                )
+              }
               style={"primary"}
               clickFn={(e) => createAccount(e)}
+              disabled={isLoading}
             />
           </form>
         </div>

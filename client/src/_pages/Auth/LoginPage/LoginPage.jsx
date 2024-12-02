@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   Button,
   CenterContent,
+  Loader,
   TextComponent,
 } from "../../../_components/IndexComponents";
 
@@ -13,17 +14,22 @@ import { login } from "../../../store/Slices/UserSlice";
 
 export const LoginPage = () => {
   const [form, setForm] = useState();
+  const [isLoading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   const createAccount = (e) => {
     e.preventDefault();
+    setLoading(true);
     mutation.mutate(form);
   };
 
   const mutation = useMutation({
     mutationFn: SignIn,
-    onSuccess: (data) => dispatch(login(data)),
+    onSuccess: (data) => {
+      setLoading(false);
+      dispatch(login(data));
+    },
   });
 
   const changeHandler = (e) => {
@@ -32,6 +38,7 @@ export const LoginPage = () => {
       [e.target.name]: e.target.value,
     });
   };
+
   return (
     <div className={styles.login__page}>
       <CenterContent>
@@ -58,9 +65,10 @@ export const LoginPage = () => {
               />
             </label>
             <Button
-              text={"Войти"}
+              text={isLoading ? <Loader width={30} height={30} /> : "Войти"}
               style={"primary"}
               clickFn={(e) => createAccount(e)}
+              isLoading={isLoading}
             />
           </form>
         </div>
