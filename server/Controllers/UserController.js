@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import User from '../models/User.js';
-import { checkAuth } from '../utils/checkAuth.js';
+import { checkAuth } from '../utils/CheckAuth.js';
 
 const UserRouter = new Router();
 
