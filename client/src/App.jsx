@@ -42,7 +42,7 @@ function App() {
     <>
       <Header />
       <ScrollToTop />
-      {user?.token & isLoading ? <Loader />  :
+      { isLoading ? <Loader />  :
         <AppRoute routes={routes} user={user} />
     }
       <Footer />
