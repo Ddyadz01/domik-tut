@@ -8,5 +8,5 @@ export const useGetMe = () =>
     queryKey: ['get me'],
     queryFn: GetMe,
     refetchOnWindowFocus: false,
-    enabled: !!user.token
+    enabled: !!user?.token
   });
