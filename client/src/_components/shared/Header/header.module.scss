@@ -137,6 +137,11 @@ $spacing: 20px;
       .headerCenter {
         display: none;
       }
+      .headerRight {
+        .user {
+          display: none;
+        }
+      }
     }
   }
 }
