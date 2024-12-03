@@ -12,15 +12,7 @@ const PopularHomeComponent = ({ products }) => {
     <div className={styles.popular__items}>
       <CenterContent>
         <TextComponent size={"heading"} text="Популярное в каталоге" />
-        <div
-          className="items"
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            margin: "80px 0 40px 0",
-          }}
-        >
+        <div className={styles.items}>
           {products &&
             products?.map((item) => <ItemCard item={item} key={item.id} />)}
         </div>

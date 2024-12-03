@@ -8,7 +8,7 @@ const AppRoute = React.memo(({ routes, user }) => {
   return (
     <Routes>
       <Route path="/product/:id" element={<ProductPage />} />
-      <Route path="*" element={<NotFound />} />
+      <Route path={"*"} exact element={<NotFound />} />
 
       {routes.map((route) => (
         <Route

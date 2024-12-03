@@ -1,23 +1,32 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import { useSelector } from 'react-redux';
-import { CenterContent } from '../../_components/IndexComponents';
-
-import styles from './404.module.scss';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+import { CenterContent } from "../../_components/IndexComponents";
+import styles from "./404.module.scss";
 
 export const NotFound = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user) {
-      if (user.token) {
-        navigate('/profile');
-      } else {
-        navigate('/auth/login');
+    if (user !== undefined) {
+      setLoading(false);
+      if (user) {
+        if (user.token) {
+          navigate("/profile");
+          setLoading(true);
+        } else {
+          navigate("/auth/login");
+          setLoading(true);
+        }
       }
     }
   }, [user, navigate]);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <CenterContent>

@@ -42,3 +42,9 @@
     }
   }
 }
+
+@media (max-width: 800px) {
+  .mini__slider {
+    display: none;
+  }
+}

@@ -1,24 +1,24 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
 
-import { Footer, Header, Loader } from './_components/IndexComponents';
+import { Footer, Header, Loader } from "./_components/IndexComponents";
 
-import { setProducts } from './store/Slices/ItemsSlice';
+import { setProducts } from "./store/Slices/ItemsSlice";
 
-import { useGetProducts } from './hooks/useProducts';
-import { useRoutes } from './hooks/useRoutes';
+import { useGetProducts } from "./hooks/useProducts";
+import { useRoutes } from "./hooks/useRoutes";
 
-import { ScrollToTop } from './utils/ScrollToTop';
+import { ScrollToTop } from "./utils/ScrollToTop";
 
-import AppRoute from './routes/AppRoute';
+import AppRoute from "./routes/AppRoute";
 
-import 'react-toastify/dist/ReactToastify.css';
-import './App.scss';
-import { useGetMe } from './hooks/useUser';
-import { login } from './store/Slices/UserSlice';
+import "react-toastify/dist/ReactToastify.css";
+import "./App.scss";
+import { useGetMe } from "./hooks/useUser";
+import { login } from "./store/Slices/UserSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,9 +42,7 @@ function App() {
     <>
       <Header />
       <ScrollToTop />
-      { isLoading ? <Loader />  :
-        <AppRoute routes={routes} user={user} />
-    }
+      {isLoading ? <Loader /> : <AppRoute routes={routes} user={user} />}
       <Footer />
       <ToastContainer
         position="bottom-right"
