@@ -24,7 +24,7 @@ function App() {
   const dispatch = useDispatch();
 
   const { data, status } = useGetProducts();
-  const { data: refreshUser } = useGetMe();
+  const { data: refreshUser, isLoading } = useGetMe();
 
   const { user } = useSelector((state) => state.user);
 
@@ -42,7 +42,9 @@ function App() {
     <>
       <Header />
       <ScrollToTop />
-      <AppRoute routes={routes} user={user} />
+      {isLoading ?  :
+        <AppRoute routes={routes} user={user} />
+    }
       <Footer />
       <ToastContainer
         position="bottom-right"
