@@ -15,18 +15,20 @@ import { ScrollToTop } from "./utils/ScrollToTop";
 
 import AppRoute from "./routes/AppRoute";
 
+import { login } from "./store/Slices/UserSlice";
+import { useAuth } from "./hooks/useAuth";
+
 import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
-import { useGetMe } from "./hooks/useUser";
-import { login } from "./store/Slices/UserSlice";
 
 function App() {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  const { useGetMe } = useAuth();
+  const { routes } = useRoutes();
 
   const { data, status } = useGetProducts();
   const { data: refreshUser, isLoading } = useGetMe();
-
-  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (data) dispatch(setProducts({ data, status }));
@@ -35,8 +37,6 @@ function App() {
   useEffect(() => {
     if (refreshUser?.data?.token) dispatch(login(refreshUser?.data));
   }, [refreshUser?.data, dispatch]);
-
-  const { routes } = useRoutes();
 
   return (
     <>

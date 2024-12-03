@@ -6,31 +6,25 @@ import {
   TextComponent,
 } from "../../../_components/IndexComponents";
 
+import { useAuth } from "../../../hooks/useAuth";
+
 import styles from "./login.module.scss";
-import { useDispatch } from "react-redux";
-import { useMutation } from "@tanstack/react-query";
-import { SignIn } from "../../../services/user.service";
-import { login } from "../../../store/Slices/UserSlice";
 
 export const LoginPage = () => {
   const [form, setForm] = useState();
   const [isLoading, setLoading] = useState(false);
 
-  const dispatch = useDispatch();
+  const { LoginMutation } = useAuth();
 
   const createAccount = (e) => {
     e.preventDefault();
     setLoading(true);
-    mutation.mutate(form);
+    LoginMutation.mutate(form, {
+      onSettled: () => {
+        setLoading(false);
+      },
+    });
   };
-
-  const mutation = useMutation({
-    mutationFn: SignIn,
-    onSuccess: (data) => {
-      setLoading(false);
-      dispatch(login(data));
-    },
-  });
 
   const changeHandler = (e) => {
     setForm({

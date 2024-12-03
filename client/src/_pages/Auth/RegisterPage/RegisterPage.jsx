@@ -6,11 +6,7 @@ import {
   TextComponent,
 } from "../../../_components/IndexComponents";
 
-import { useMutation } from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
-
-import { SignUp } from "../../../services/user.service";
-import { login } from "../../../store/Slices/UserSlice";
+import { useAuth } from "../../../hooks/useAuth";
 
 import styles from "./register.module.scss";
 
@@ -18,21 +14,15 @@ export const RegisterPage = () => {
   const [form, setForm] = useState();
   const [isLoading, setLoading] = useState(false);
 
-  const dispatch = useDispatch();
+  const { RegisterMutation } = useAuth();
 
   const createAccount = (e) => {
     e.preventDefault();
     setLoading(true);
-    mutation.mutate(form);
+    RegisterMutation.mutate(form, {
+      onSuccess: () => setLoading(false),
+    });
   };
-
-  const mutation = useMutation({
-    mutationFn: SignUp,
-    onSuccess: (data) => {
-      dispatch(login(data));
-      setLoading(false);
-    },
-  });
 
   const changeHandler = (e) => {
     setForm({
