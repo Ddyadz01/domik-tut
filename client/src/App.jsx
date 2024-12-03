@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { ToastContainer } from 'react-toastify';
 
-import { Footer, Header } from './_components/IndexComponents';
+import { Footer, Header, Loader } from './_components/IndexComponents';
 
 import { setProducts } from './store/Slices/ItemsSlice';
 
@@ -42,7 +42,7 @@ function App() {
     <>
       <Header />
       <ScrollToTop />
-      {isLoading ?  :
+      {isLoading ? <Loader />  :
         <AppRoute routes={routes} user={user} />
     }
       <Footer />
