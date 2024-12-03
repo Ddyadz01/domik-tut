@@ -6,4 +6,5 @@ export const useGetMe = () =>
     queryKey: ['get me'],
     queryFn: GetMe,
     refetchOnWindowFocus: false,
+    enabled: localStorage.getItem("token")
   });
