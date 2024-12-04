@@ -15,7 +15,7 @@ import {
 const routesIndex = [
   {
     id: 1,
-    path: '/',
+    path: '/home',
     element: <Home />,
     title: 'Главная',
     type: 'public',
