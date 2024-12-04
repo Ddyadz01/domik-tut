@@ -1,10 +1,8 @@
-import React from 'react';
+import { TextComponent } from "../../../_components/IndexComponents";
 
-import { TextComponent } from '../../../_components/IndexComponents';
+import { BedDouble, User } from "lucide-react";
 
-import { BedDouble, User } from 'lucide-react';
-
-import styles from '../product.module.scss';
+import styles from "../product.module.scss";
 
 const ProductMoreInfo = ({ product }) => {
   return (
@@ -12,7 +10,7 @@ const ProductMoreInfo = ({ product }) => {
       <thead>
         <tr>
           <th scope="col" colSpan={4}>
-            <TextComponent text={'Дополнительная информация'} size="lg" />
+            <TextComponent text={"Дополнительная информация"} size="lg" />
           </th>
         </tr>
       </thead>

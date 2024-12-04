@@ -124,10 +124,11 @@
 @media (max-width: 450px) {
   .home {
     top: 0;
-    img {
-      width: 100%;
-      height: 500px;
-      left: 10%;
+    img.background {
+      width: 214%;
+      height: 415px;
+      left: -27%;
+      position: relative;
     }
     &__content {
       width: 100% !important;
@@ -167,6 +168,7 @@
     }
   }
   .popular__items {
+    margin-top: 40px;
     .items {
       margin-top: 30px;
       justify-content: center;
@@ -174,5 +176,8 @@
   }
   .title_block {
     font-size: 22px;
+  }
+  .home__options {
+    margin-top: 40px;
   }
 }

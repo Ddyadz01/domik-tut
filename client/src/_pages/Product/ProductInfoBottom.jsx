@@ -1,9 +1,9 @@
-import { TextComponent } from '../../_components/IndexComponents';
+import { TextComponent } from "../../_components/IndexComponents";
 
-import ProductPrice from './ProductPriceInfo/ProductPrice';
-import ProductMoreInfo from './ProductMoreInfo/ProductMoreInfo';
+import ProductPrice from "./ProductPriceInfo/ProductPrice";
+import ProductMoreInfo from "./ProductMoreInfo/ProductMoreInfo";
 
-import styles from './product.module.scss';
+import styles from "./product.module.scss";
 
 const ProductInfoBottom = ({ product }) => {
   return (
@@ -13,16 +13,16 @@ const ProductInfoBottom = ({ product }) => {
           <thead>
             <tr>
               <th scope="col">
-                <TextComponent text={'Тип жилья'} size="base" />
+                <TextComponent text={"Тип жилья"} size="base" />
               </th>
               <th scope="col">
-                <TextComponent text={'Этажи'} size="base" />
+                <TextComponent text={"Этажи"} size="base" />
               </th>
               <th scope="col">
-                <TextComponent text={'Площадь'} size="base" />
+                <TextComponent text={"Площадь"} size="base" />
               </th>
               <th scope="col">
-                <TextComponent text={'Участок'} size="base" />
+                <TextComponent text={"Участок"} size="base" />
               </th>
             </tr>
           </thead>

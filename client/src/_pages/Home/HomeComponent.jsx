@@ -1,13 +1,13 @@
-import { CenterContent } from '../../_components/IndexComponents';
-import { Slider } from '../../_components/shared/Slider/Slider';
+import { CenterContent } from "../../_components/IndexComponents";
+import { Slider } from "../../_components/shared/Slider/Slider";
 
-import styles from './home.module.scss';
+import styles from "./home.module.scss";
 
 const HomeComponent = () => {
   return (
     <div className={styles.home}>
       <div className={styles.home__background}>
-        <img src="/home__bg-image.png" alt="" />
+        <img className={styles.background} src="/home__bg-image.png" alt="" />
       </div>
       <CenterContent>
         <div className={styles.home__content}>
