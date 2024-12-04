@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Navigate} from "react-router";
 import { useSelector } from "react-redux";
 import { CenterContent } from "../../_components/IndexComponents";
 import styles from "./404.module.scss";
