@@ -14,10 +14,10 @@ export const NotFound = () => {
       setLoading(false);
       if (user) {
         if (user.token) {
-          navigate("/auth/profile");
+          navigate("/profile");
           setLoading(true);
         } else {
-          navigate("/register");
+          navigate("/auth/register");
           setLoading(true);
         }
       }
