@@ -17,7 +17,7 @@ export const NotFound = () => {
           navigate("/profile");
           setLoading(true);
         } else {
-          navigate("/home");
+          navigate("/auth/register");
           setLoading(true);
         }
       }
