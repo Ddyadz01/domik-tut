@@ -17,7 +17,7 @@ export const NotFound = () => {
           navigate("/profile");
           setLoading(true);
         } else {
-          navigate("/product/674c68c50bf2b7aac7727236");
+          navigate("/auth/login");
           setLoading(true);
         }
       }
