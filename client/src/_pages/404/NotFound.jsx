@@ -14,7 +14,7 @@ export const NotFound = () => {
       setLoading(false);
       if (user) {
         if (user.token) {
-          navigate("/profile");
+          navigate("/auth/profile");
           setLoading(true);
         } else {
           navigate("/register");
